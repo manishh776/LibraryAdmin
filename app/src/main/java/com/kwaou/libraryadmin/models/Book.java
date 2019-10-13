@@ -9,7 +9,6 @@ public class Book implements Serializable {
     private int price;
     private  int status = 0; // 0 available 1 exchanged 2 sold
 
-
     public Book(){
 
     }

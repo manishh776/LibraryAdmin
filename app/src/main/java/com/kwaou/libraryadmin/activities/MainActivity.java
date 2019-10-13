@@ -7,13 +7,14 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.kwaou.libraryadmin.ComplaintActivity;
+import com.kwaou.libraryadmin.EditNActivity;
 import com.kwaou.libraryadmin.R;
 import com.kwaou.libraryadmin.UsersActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView category, nocontent, payment, transfer, books, orders;
-    TextView users, complaints;
+    TextView users, complaints, valueOfN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         books = findViewById(R.id.books);
         users = findViewById(R.id.users);
         complaints = findViewById(R.id.complaints);
-
+        valueOfN = findViewById(R.id.valueOfN);
         category.setOnClickListener(this);
         payment.setOnClickListener(this);
         transfer.setOnClickListener(this);
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         orders.setOnClickListener(this);
         users.setOnClickListener(this);
         complaints.setOnClickListener(this);
-
+        valueOfN.setOnClickListener(this);
     }
 
     @Override
@@ -67,6 +68,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         else if(view == complaints){
             startActivity(new Intent(this, ComplaintActivity.class));
+        }else if(view == valueOfN){
+            startActivity(new Intent(this, EditNActivity.class));
         }
     }
 }

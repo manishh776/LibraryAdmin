@@ -57,11 +57,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         if (remoteMessage.getData().size() > 0) {
             Log.e(TAG, "Data Payload: " + remoteMessage.getData().toString());
             try {
-
                 Log.d("Try","Just got into try");
                 JSONObject json = new JSONObject(remoteMessage.getData().toString());
-
-
                 parseNotificationData(json);
             } catch (Exception e) {
                 Log.e(TAG, "Exception: " + e.getMessage());
@@ -91,9 +88,14 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     TYPE = Config.SALE;
                     title = "Book Sold. Payment Received";
                     break;
+                case Config.PURCHASED_BOOK_RECEIVED:
+                    TYPE = Config.PURCHASED_BOOK_RECEIVED;
+                    title = "Book has been received by the buyer.";
+                    break;
                 case Config.COMPLAINT:
                     TYPE = Config.COMPLAINT;
                     title = "Complaint Received";
+                    break;
             }
 
 
@@ -133,8 +135,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 from = gson.fromJson(fromUser.toString(), User.class);
                 message = "A set of " + oldBook.getBookArrayList().size() + " books has been bought by" +
                         " " + from.getName() + ". Please make payment to the concerned owner";
-
-            }else{
+            }else if(TYPE.equals(Config.PURCHASED_BOOK_RECEIVED)){
+                JSONObject old = jsonObject.getJSONObject("old");
+                BookPackage oldBook = gson.fromJson(old.toString(), BookPackage.class);
+                message = oldBook.getBookArrayList().get(0).getTitle() + " named book has been received by the buyer";
+            }
+            else{
                 JSONObject fromUser = jsonObject.getJSONObject("from");
                 from = gson.fromJson(fromUser.toString(), User.class);
                 message = from. getName() + " has registered a new complaint. Please Check it out";

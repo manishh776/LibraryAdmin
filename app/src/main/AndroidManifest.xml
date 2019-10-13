@@ -12,12 +12,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UsersActivity"></activity>
+        <activity android:name=".EditNActivity"></activity>
+        <activity android:name=".UsersActivity" />
         <activity android:name=".activities.BookDealsActivity" />
         <activity android:name=".activities.AddCategoryActivity" />
         <activity android:name=".activities.CategoryActivity" />
         <activity android:name=".activities.MainActivity" />
-        <activity android:name=".ComplaintActivity"/>
+        <activity android:name=".ComplaintActivity" />
         <activity android:name=".activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
