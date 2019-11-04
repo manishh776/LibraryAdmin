@@ -106,14 +106,10 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
 
     private void showReplyAlertDialog(final Complaint complaint) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-
-        // Set up the input
         final EditText input = new EditText(context);
-// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
         builder.setView(input);
 
-// Set up the buttons
         builder.setPositiveButton("Send", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -138,7 +134,6 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
     private void notifyUser(Complaint complaint, String m_Text) {
         DatabaseReference comRefs = FirebaseDatabase.getInstance().getReference(Config.FIREBASE_COMPLAINTS);
         comRefs.child(complaint.getId()).child("reply").setValue(m_Text);
-
         sendPush(complaint, complaint.getUser().getToken());
     }
 

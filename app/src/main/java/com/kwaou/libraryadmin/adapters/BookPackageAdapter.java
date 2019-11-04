@@ -1,20 +1,15 @@
 package com.kwaou.libraryadmin.adapters;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -22,14 +17,7 @@ import com.kwaou.libraryadmin.R;
 import com.kwaou.libraryadmin.models.BookPackage;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
-
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class BookPackageAdapter extends RecyclerView.Adapter<BookPackageAdapter.ViewHolder> {
 
@@ -85,7 +73,6 @@ public class BookPackageAdapter extends RecyclerView.Adapter<BookPackageAdapter.
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             image = itemView.findViewById(R.id.image);
             price = itemView.findViewById(R.id.price);
             noofbooks = itemView.findViewById(R.id.noofbooks);
