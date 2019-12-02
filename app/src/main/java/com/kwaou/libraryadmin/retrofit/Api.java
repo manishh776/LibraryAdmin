@@ -8,16 +8,10 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
 public interface Api {
-
-
     @FormUrlEncoded
     @POST("sendPush.php")
     Call<ResponseBody> sendPush(
             @Field("token") String token,
             @Field("message") String message,
             @Field("type") String type);
-
-
-
-
 }

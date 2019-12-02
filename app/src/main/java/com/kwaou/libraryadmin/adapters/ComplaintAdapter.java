@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -108,6 +109,8 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         final EditText input = new EditText(context);
         input.setInputType(InputType.TYPE_CLASS_TEXT);
+        input.setSingleLine(false);
+        input.setImeOptions(EditorInfo.IME_FLAG_NO_ENTER_ACTION);
         builder.setView(input);
 
         builder.setPositiveButton("Send", new DialogInterface.OnClickListener() {
@@ -140,28 +143,31 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
     private void sendPush(Complaint complaint, String token) {
         Gson gson = new Gson();
         String comstr = gson.toJson(complaint);
+        Log.d(TAG, "Comstr" + comstr);
         ComplaintActivity.progressDialog.show();
         String type = Config.COMPLAINT_REPLY;
-
         RetrofitClient.getInstance().getApi().sendPush(token, comstr,type)
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
+                        Log.d(TAG, "onResponse");
                         try {
-                            JSONObject obj = new JSONObject(response.body().string());
+                            Log.d(TAG, "try" + response.body().string());
                             Log.d(TAG, response.body().string());
-                        } catch (JSONException | IOException e) {
+                        } catch (Exception e) {
+                            Log.d(TAG, "catch");
                             e.printStackTrace();
+                            Log.d(TAG, e.getMessage());
                         }
-
                         ComplaintActivity.progressDialog.dismiss();
                     }
 
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                        Log.d(TAG, "onFailure" + t.getCause());
+                        Log.d(TAG, t.getMessage());
                     }
                 });
+        Log.d(TAG, "onEnd");
     }
 }
